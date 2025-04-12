@@ -29,6 +29,16 @@ More [here](wrangler-docs/upcoming-features.md) on upcoming features.
     * Custom Directive Implementation Internals [here](wrangler-docs/udd-internal.md)
 
   * A new capability that allows CDAP Administrators to **restrict the directives** that are accessible to their users.
+  donot create new file just add the given section to the given readme file
+
+  * **Byte Size and Time Duration Parsers** This fork adds support for parsing byte sizes and time durations in Wrangler recipes.
+    * **Byte Size Parser** The Byte Size parser allows you to work with data sizes using common units:
+      * Supported units: B, KB, MB, GB, TB, PB (case-insensitive)
+      * Example values: "10KB", "1.5MB", "2GB"
+    * **Time Duration Parser** The Time Duration parser allows you to work with time intervals using common units:
+      * Supported units: ns (nanoseconds), ms (milliseconds), s (seconds), m (minutes), h (hours), d (days)
+      * Example values: "100ms", "2.5s", "10m"
+    * **Aggregate Stats Directive** A new directive `aggregate-stats` has been added to demonstrate the usage of these parsers.
 More information on configuring can be found [here](wrangler-docs/exclusion-and-aliasing.md)
 
 ## Demo Videos and Recipes
