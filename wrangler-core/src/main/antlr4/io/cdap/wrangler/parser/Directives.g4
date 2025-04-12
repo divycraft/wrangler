@@ -139,8 +139,15 @@ numberRange
  : Number ':' Number '=' value
  ;
 
+// Updated value rule with labeled alternatives
 value
- : String | Number | Column | Bool
+ : Number                                                     #numberValue
+ | BYTE_SIZE                                                  #byteSizeValue
+ | TIME_DURATION                                              #timeDurationValue
+ | String                                                     #stringValue
+ | Bool                                                       #booleanValue
+ | Identifier                                                 #identifierValue
+ | Column                                                     #columnValue
  ;
 
 ecommand
@@ -296,7 +303,7 @@ fragment
    HexDigit : ('0'..'9'|'a'..'f'|'A'..'F') ;
 
 Comment
- : ('//' ~[\r\n]* | '/*' .*? '*/' | '--' ~[\r\n]* ) -> skip
+ : ('//' ~[\r\n]* | '/' .? '/' | '--' ~[\r\n] ) -> skip
  ;
 
 Space
@@ -311,3 +318,22 @@ fragment Int
 fragment Digit
  : [0-9]
  ;
+
+// Corrected lexer rules for byte size and time duration
+BYTE_SIZE 
+ : Number BYTE_UNIT
+ ;
+
+TIME_DURATION 
+ : Number TIME_UNIT
+ ;
+
+// Corrected fragments
+fragment BYTE_UNIT 
+ : ('B'|'KB'|'MB'|'GB'|'TB'|'PB'|'b'|'kb'|'mb'|'gb'|'tb'|'pb')
+ ;
+
+fragment TIME_UNIT 
+ : ('ns'|'ms'|'s'|'m'|'h'|'d')
+ ;
+ 
